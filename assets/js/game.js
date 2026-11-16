@@ -1428,6 +1428,7 @@
 		var subEl = document.querySelector( '.sh-message__sub' );
 		var soundBtn = document.querySelector( '.sh-sound' );
 		var swatches = Array.prototype.slice.call( document.querySelectorAll( '.sh-swatch' ) );
+		var panel = document.querySelector( '.sh-panel' );
 
 		var theme = cfg.theme;
 		if ( cfg.allowSwitch && THEMES[ store.get( THEME_KEY ) ] ) {
@@ -1451,6 +1452,10 @@
 			},
 			state: function ( s, info ) {
 				body.setAttribute( 'data-state', s );
+				if ( s === 'playing' ) {
+					// The card is hidden during play; never leave focus on a control inside it.
+					releaseFocus( panel );
+				}
 				if ( s === 'ready' ) {
 					message( strings.ready, info.best ? strings.start + '  ·  ' + fmt( strings.best, info.best ) : strings.start );
 				} else if ( s === 'paused' ) {
@@ -1484,11 +1489,20 @@
 		applySound();
 		ui.state( 'ready', { best: game.getBest() } );
 
+		// Hand keyboard focus back to the page so Space keeps working after a click.
+		function releaseFocus( within ) {
+			var el = document.activeElement;
+			if ( el && el !== document.body && el.blur && ( ! within || within.contains( el ) ) ) {
+				el.blur();
+			}
+		}
+
 		canvas.addEventListener( 'pointerdown', function ( e ) {
 			if ( e.button > 0 ) {
 				return;
 			}
 			e.preventDefault();
+			releaseFocus();
 			game.flap();
 		} );
 
@@ -1508,7 +1522,10 @@
 			}
 		} );
 
-		soundBtn.addEventListener( 'click', function () {
+		soundBtn.addEventListener( 'click', function ( e ) {
+			if ( e.detail ) {
+				soundBtn.blur();
+			}
 			sound = ! sound;
 			store.set( SOUND_KEY, sound ? '1' : '0' );
 			game.audio.set( sound );
@@ -1516,7 +1533,11 @@
 		} );
 
 		swatches.forEach( function ( sw ) {
-			sw.addEventListener( 'click', function () {
+			sw.addEventListener( 'click', function ( e ) {
+				// Mouse/touch clicks (detail > 0) drop focus; keyboard users keep it.
+				if ( e.detail ) {
+					sw.blur();
+				}
 				var key = game.setTheme( sw.getAttribute( 'data-theme' ) );
 				store.set( THEME_KEY, key );
 				applyTheme( key );
