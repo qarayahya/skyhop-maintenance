@@ -1,0 +1,419 @@
+/* Skyhop 404 – settings screen. Follows WordPress admin tokens. */
+
+.sh-admin {
+	--sh-accent: var(--wp-admin-theme-color, #2271b1);
+	--sh-accent-darker: var(--wp-admin-theme-color-darker-10, #135e96);
+	--sh-border: #dcdcde;
+	--sh-border-strong: #c3c4c7;
+	--sh-text: #1e1e1e;
+	--sh-muted: #646970;
+	--sh-surface: #fff;
+	--sh-subtle: #f6f7f7;
+
+	max-width: 960px;
+	color: var(--sh-text);
+}
+
+/* Header ----------------------------------------------------------------- */
+
+.sh-header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	margin: 12px 0 20px;
+}
+
+.sh-header__brand {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+}
+
+.sh-mark {
+	display: block;
+	flex: none;
+	width: 44px;
+	height: 44px;
+	color: var(--sh-accent);
+}
+
+.sh-mark svg {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.sh-admin .sh-header h1 {
+	margin: 0;
+	padding: 0;
+	font-size: 23px;
+	font-weight: 600;
+	line-height: 1.3;
+}
+
+.sh-header__tagline {
+	margin: 2px 0 0;
+	color: var(--sh-muted);
+}
+
+.sh-header__actions {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.sh-status {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	color: var(--sh-muted);
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.sh-status::before {
+	content: "";
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: #a7aaad;
+}
+
+.sh-status.is-live::before {
+	background: #00a32a;
+	box-shadow: 0 0 0 3px rgba(0, 163, 42, 0.15);
+}
+
+.sh-admin .wp-header-end {
+	visibility: hidden;
+	margin: 0;
+}
+
+/* Cards ------------------------------------------------------------------ */
+
+.sh-card {
+	margin-bottom: 16px;
+	border: 1px solid var(--sh-border);
+	border-radius: 8px;
+	background: var(--sh-surface);
+}
+
+.sh-card__head {
+	padding: 20px 24px 4px;
+}
+
+.sh-admin .sh-card__head h2 {
+	margin: 0;
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.sh-card__head p {
+	margin: 4px 0 0;
+	color: var(--sh-muted);
+}
+
+.sh-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 24px;
+	padding: 16px 24px;
+	border-top: 1px solid #f0f0f1;
+}
+
+.sh-card__head + .sh-row {
+	border-top: 0;
+}
+
+.sh-row__label label,
+.sh-row__title {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.sh-help {
+	margin: 2px 0 0;
+	color: var(--sh-muted);
+	font-size: 13px;
+}
+
+.sh-field {
+	padding: 12px 24px 4px;
+}
+
+.sh-field label {
+	display: block;
+	margin-bottom: 6px;
+	font-weight: 500;
+}
+
+.sh-field input[type="text"],
+.sh-field textarea {
+	width: 100%;
+	max-width: none;
+	padding: 6px 10px;
+	border-color: var(--sh-border-strong);
+	border-radius: 4px;
+}
+
+.sh-field + .sh-row {
+	margin-top: 12px;
+}
+
+/* Toggle (mirrors the block editor ToggleControl) ------------------------- */
+
+.sh-toggle {
+	position: relative;
+	display: inline-block;
+	flex: none;
+	width: 36px;
+	height: 18px;
+}
+
+.sh-toggle input[type="checkbox"] {
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.sh-toggle__track {
+	position: absolute;
+	inset: 0;
+	border: 1px solid #1e1e1e;
+	border-radius: 9px;
+	background: #fff;
+	transition: background-color 0.15s, border-color 0.15s;
+}
+
+.sh-toggle__track::after {
+	content: "";
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: #1e1e1e;
+	transition: transform 0.15s, background-color 0.15s;
+}
+
+.sh-toggle input:checked + .sh-toggle__track {
+	border-color: var(--sh-accent);
+	background: var(--sh-accent);
+}
+
+.sh-toggle input:checked + .sh-toggle__track::after {
+	background: #fff;
+	transform: translateX(18px);
+}
+
+.sh-toggle input:focus-visible + .sh-toggle__track {
+	box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--sh-accent);
+}
+
+/* Segmented control ------------------------------------------------------ */
+
+.sh-segmented {
+	display: inline-flex;
+	flex: none;
+	padding: 2px;
+	border: 1px solid var(--sh-border-strong);
+	border-radius: 4px;
+	background: #fff;
+}
+
+.sh-segmented label {
+	position: relative;
+}
+
+.sh-segmented input {
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.sh-segmented span {
+	display: block;
+	padding: 5px 14px;
+	border-radius: 2px;
+	color: var(--sh-text);
+	font-size: 13px;
+	font-weight: 500;
+	white-space: nowrap;
+	cursor: pointer;
+	transition: background-color 0.15s, color 0.15s;
+}
+
+.sh-segmented span:hover {
+	background: var(--sh-subtle);
+}
+
+.sh-segmented input:checked + span {
+	background: #1e1e1e;
+	color: #fff;
+}
+
+.sh-segmented input:focus-visible + span {
+	box-shadow: 0 0 0 2px var(--sh-accent);
+}
+
+/* Theme picker ----------------------------------------------------------- */
+
+.sh-admin .sh-themes {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 20px 16px;
+	padding: 16px 24px 24px;
+}
+
+.sh-theme {
+	position: relative;
+	display: block;
+	cursor: pointer;
+}
+
+.sh-theme input {
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.sh-theme__frame {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	aspect-ratio: 16 / 10;
+	border-radius: 6px;
+	background: var(--sh-subtle);
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+	transition: box-shadow 0.15s;
+}
+
+.sh-theme:hover .sh-theme__frame {
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 4px 14px -6px rgba(0, 0, 0, 0.3);
+}
+
+.sh-theme input:checked + .sh-theme__frame {
+	box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--sh-accent);
+}
+
+.sh-theme input:focus-visible + .sh-theme__frame {
+	box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--sh-accent), 0 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.sh-theme__canvas {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.sh-theme__mosaic {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	gap: 2px;
+	height: 100%;
+	background: #fff;
+}
+
+.sh-theme__check {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	display: grid;
+	place-items: center;
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	background: var(--sh-accent);
+	color: #fff;
+	opacity: 0;
+	transform: scale(0.6);
+	transition: opacity 0.15s, transform 0.15s;
+}
+
+.sh-theme__check svg {
+	width: 16px;
+	height: 16px;
+}
+
+.sh-theme input:checked + .sh-theme__frame .sh-theme__check {
+	opacity: 1;
+	transform: none;
+}
+
+.sh-theme__name {
+	display: block;
+	margin-top: 10px;
+	font-weight: 600;
+}
+
+.sh-theme__desc {
+	display: block;
+	margin-top: 2px;
+	color: var(--sh-muted);
+	font-size: 12px;
+	line-height: 1.45;
+}
+
+/* Footer actions --------------------------------------------------------- */
+
+.sh-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 16px;
+	margin-top: 8px;
+}
+
+.sh-actions__note {
+	color: var(--sh-muted);
+	font-size: 13px;
+}
+
+@media (max-width: 782px) {
+	.sh-row {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 12px;
+	}
+
+	.sh-row:has(.sh-toggle) {
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.sh-segmented {
+		flex-wrap: wrap;
+	}
+
+	.sh-admin .sh-themes {
+		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+		padding: 12px 16px 20px;
+	}
+
+	.sh-card__head,
+	.sh-field {
+		padding-right: 16px;
+		padding-left: 16px;
+	}
+
+	.sh-row {
+		padding-right: 16px;
+		padding-left: 16px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sh-admin * {
+		transition: none !important;
+	}
+}
