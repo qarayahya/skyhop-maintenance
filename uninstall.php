@@ -2,9 +2,9 @@
 /**
  * Remove plugin data on uninstall.
  *
- * @package Skyhop404
+ * @package SkyhopMaintenance
  */
 
 defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
 
-delete_option( 'skyhop404_settings' );
+delete_option( 'skyhop_maintenance_settings' );

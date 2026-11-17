@@ -1,10 +1,10 @@
 /**
- * Skyhop 404 – game engine and themes.
+ * Skyhop Maintenance – game engine and themes.
  *
  * The world is a fixed 600 units tall; its width follows the viewport's aspect
  * ratio. Every theme draws in world units, so art scales cleanly on any screen.
  *
- * Exposes window.Skyhop404 = { themes, mount, preview }.
+ * Exposes window.SkyhopMaintenance = { themes, mount, preview }.
  */
 ( function ( window, document ) {
 	'use strict';
@@ -15,10 +15,9 @@
 	var COL_W = 72;
 	var PI = Math.PI;
 	var TAU = PI * 2;
-	var DIGITS = '404';
-	var BEST_KEY = 'skyhop404.best';
-	var THEME_KEY = 'skyhop404.theme';
-	var SOUND_KEY = 'skyhop404.sound';
+	var BEST_KEY = 'skyhop.best';
+	var THEME_KEY = 'skyhop.theme';
+	var SOUND_KEY = 'skyhop.sound';
 
 	var DIFFICULTY = {
 		easy: { gravity: 1250, flap: 400, speed: 150, gap: 210, spacing: 280 },
@@ -1154,6 +1153,7 @@
 	function createGame( canvas, cfg, ui ) {
 		var ctx = canvas.getContext( '2d' );
 		var diff = DIFFICULTY[ cfg.difficulty ] || DIFFICULTY.normal;
+		var word = String( cfg.word || '' ).slice( 0, 6 );
 		var reduceMotion = window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
 		var audio = createAudio( cfg.sound );
 
@@ -1217,7 +1217,7 @@
 				gy: clamp( prev + ( Math.random() * 2 - 1 ) * 170, min, max ),
 				gap: diff.gap,
 				scored: false,
-				digit: spawned < DIGITS.length ? DIGITS.charAt( spawned ) : ''
+				digit: spawned < word.length ? word.charAt( spawned ) : ''
 			} );
 			spawned++;
 		}
@@ -1412,10 +1412,10 @@
 		};
 	}
 
-	/* DOM wiring for the 404 page ----------------------------------------- */
+	/* DOM wiring for the maintenance page --------------------------------- */
 
 	function mount() {
-		var cfg = window.Skyhop404Config;
+		var cfg = window.SkyhopMaintenanceConfig;
 		var canvas = document.getElementById( 'sh-canvas' );
 		if ( ! cfg || ! canvas ) {
 			return;
@@ -1489,6 +1489,8 @@
 		applySound();
 		ui.state( 'ready', { best: game.getBest() } );
 
+		startCountdown( document.querySelector( '.sh-countdown' ) );
+
 		// Hand keyboard focus back to the page so Space keeps working after a click.
 		function releaseFocus( within ) {
 			var el = document.activeElement;
@@ -1545,6 +1547,54 @@
 		} );
 	}
 
+	/* Countdown ----------------------------------------------------------- */
+
+	function startCountdown( root ) {
+		if ( ! root ) {
+			return;
+		}
+
+		// Measure against the server clock so a wrong device clock can't skew it.
+		var target = parseInt( root.getAttribute( 'data-target' ), 10 ) || 0;
+		var skew = ( parseInt( root.getAttribute( 'data-now' ), 10 ) || Date.now() ) - Date.now();
+		var units = {};
+		var timer = 0;
+
+		Array.prototype.forEach.call( root.querySelectorAll( '[data-unit]' ), function ( el ) {
+			units[ el.getAttribute( 'data-unit' ) ] = el;
+		} );
+
+		function pad( n ) {
+			return n < 10 ? '0' + n : String( n );
+		}
+
+		function tick() {
+			var left = Math.max( 0, Math.floor( ( target - ( Date.now() + skew ) ) / 1000 ) );
+			var parts = {
+				d: Math.floor( left / 86400 ),
+				h: Math.floor( ( left % 86400 ) / 3600 ),
+				m: Math.floor( ( left % 3600 ) / 60 ),
+				s: left % 60
+			};
+
+			Object.keys( units ).forEach( function ( key ) {
+				units[ key ].querySelector( '.sh-countdown__value' ).textContent = key === 'd' ? parts.d : pad( parts[ key ] );
+			} );
+			if ( units.d ) {
+				units.d.hidden = parts.d === 0;
+			}
+
+			if ( ! left ) {
+				window.clearInterval( timer );
+				root.classList.add( 'is-done' );
+				root.querySelector( '.sh-countdown__done' ).hidden = false;
+			}
+		}
+
+		timer = window.setInterval( tick, 1000 );
+		tick();
+	}
+
 	/* Admin previews ------------------------------------------------------ */
 
 	function preview( canvas, key ) {
@@ -1584,7 +1634,7 @@
 		};
 	}
 
-	window.Skyhop404 = { themes: THEME_KEYS, mount: mount, preview: preview };
+	window.SkyhopMaintenance = { themes: THEME_KEYS, mount: mount, preview: preview };
 
 	if ( document.readyState === 'loading' ) {
 		document.addEventListener( 'DOMContentLoaded', mount );

@@ -1,10 +1,10 @@
 /**
- * Skyhop 404 – settings screen: live theme previews and preview link.
+ * Skyhop Maintenance – settings screen: live theme previews and preview link.
  */
 ( function () {
 	'use strict';
 
-	var engine = window.Skyhop404;
+	var engine = window.SkyhopMaintenance;
 	if ( ! engine ) {
 		return;
 	}
@@ -59,7 +59,7 @@
 	var form = document.querySelector( '.sh-form' );
 
 	function checked( field ) {
-		var input = form.querySelector( 'input[name="skyhop404_settings[' + field + ']"]:checked' );
+		var input = form.querySelector( 'input[name="' + form.getAttribute( 'data-option' ) + '[' + field + ']"]:checked' );
 		return input ? input.value : '';
 	}
 

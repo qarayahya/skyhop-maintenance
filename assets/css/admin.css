@@ -1,4 +1,4 @@
-/* Skyhop 404 – settings screen. Follows WordPress admin tokens. */
+/* Skyhop Maintenance – settings screen. Follows WordPress admin tokens. */
 
 .sh-admin {
 	--sh-accent: var(--wp-admin-theme-color, #2271b1);
@@ -81,9 +81,29 @@
 	background: #a7aaad;
 }
 
-.sh-status.is-live::before {
+.sh-status.is-on {
+	color: #996800;
+}
+
+.sh-status.is-on::before {
+	background: #dba617;
+	box-shadow: 0 0 0 3px rgba(219, 166, 23, 0.2);
+}
+
+.sh-status.is-off::before {
 	background: #00a32a;
-	box-shadow: 0 0 0 3px rgba(0, 163, 42, 0.15);
+}
+
+.sh-admin .sh-datetime {
+	flex: none;
+	min-height: 32px;
+	padding: 0 8px;
+	border-color: var(--sh-border-strong);
+	border-radius: 4px;
+}
+
+.sh-field .sh-help {
+	margin-top: 6px;
 }
 
 .sh-admin .wp-header-end {
@@ -372,11 +392,6 @@
 	align-items: center;
 	gap: 16px;
 	margin-top: 8px;
-}
-
-.sh-actions__note {
-	color: var(--sh-muted);
-	font-size: 13px;
 }
 
 @media (max-width: 782px) {

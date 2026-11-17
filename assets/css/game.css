@@ -1,4 +1,4 @@
-/* Skyhop 404 – game page */
+/* Skyhop Maintenance – maintenance page */
 
 .sh-theme-meadow { --sh-base: #bfe6fb; --sh-panel: rgba(255, 255, 255, 0.88); --sh-border: rgba(31, 45, 61, 0.08); --sh-text: #1d2b3a; --sh-muted: #5a6b7c; --sh-accent: #e8692c; --sh-on-accent: #fff; --sh-field: rgba(29, 43, 58, 0.06); }
 .sh-theme-night  { --sh-base: #151a4a; --sh-panel: rgba(16, 20, 58, 0.84); --sh-border: rgba(255, 255, 255, 0.08); --sh-text: #eef0ff; --sh-muted: #a9add6; --sh-accent: #ffd36b; --sh-on-accent: #191d4d; --sh-field: rgba(255, 255, 255, 0.08); }
@@ -174,17 +174,25 @@ body {
 	pointer-events: none;
 }
 
-.sh-panel__site {
-	display: inline-block;
+.sh-panel__top {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 12px;
 	margin-bottom: 14px;
 	color: var(--sh-muted);
 	font-size: 13px;
 	font-weight: 600;
+}
+
+.sh-panel__login {
+	color: var(--sh-muted);
 	text-decoration: none;
 }
 
-.sh-panel__site:hover {
+.sh-panel__login:hover {
 	color: var(--sh-text);
+	text-decoration: underline;
 }
 
 .sh-panel__eyebrow {
@@ -209,48 +217,60 @@ body {
 	color: var(--sh-muted);
 }
 
-.sh-search {
+.sh-countdown__label {
+	margin: 18px 0 8px;
+	color: var(--sh-muted);
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+
+.sh-countdown__units {
 	display: flex;
-	margin-top: 18px;
+	gap: 8px;
+}
+
+.sh-countdown__unit {
+	flex: 1;
+	padding: 9px 0 7px;
 	border-radius: 12px;
 	background: var(--sh-field);
+	text-align: center;
 }
 
-.sh-search__input {
-	flex: 1;
-	min-width: 0;
-	height: 44px;
-	padding: 0 14px;
-	border: 0;
-	background: transparent;
-	color: inherit;
-	font: inherit;
-	outline: none;
-	-webkit-appearance: none;
-	appearance: none;
+.sh-countdown__unit[hidden] {
+	display: none;
 }
 
-.sh-search__input::placeholder {
+.sh-countdown__value {
+	display: block;
+	font-size: 22px;
+	font-weight: 750;
+	font-variant-numeric: tabular-nums;
+	line-height: 1.1;
+	letter-spacing: -0.01em;
+}
+
+.sh-countdown__name {
+	display: block;
+	margin-top: 2px;
 	color: var(--sh-muted);
+	font-size: 11px;
+	font-weight: 600;
 }
 
-.sh-search:focus-within {
-	box-shadow: 0 0 0 2px var(--sh-accent);
+.sh-countdown.is-done .sh-countdown__label,
+.sh-countdown.is-done .sh-countdown__units {
+	display: none;
 }
 
-.sh-search__btn {
-	display: grid;
-	place-items: center;
-	width: 44px;
-	border: 0;
-	background: none;
-	color: var(--sh-muted);
-	cursor: pointer;
-}
-
-.sh-search__btn svg {
-	width: 20px;
-	height: 20px;
+.sh-countdown__done {
+	margin: 16px 0 0;
+	padding: 10px 12px;
+	border-radius: 12px;
+	background: var(--sh-field);
+	font-weight: 600;
 }
 
 .sh-btn {
@@ -259,7 +279,7 @@ body {
 	justify-content: center;
 	gap: 8px;
 	height: 44px;
-	margin-top: 10px;
+	margin-top: 16px;
 	border-radius: 12px;
 	background: var(--sh-accent);
 	color: var(--sh-on-accent);
@@ -358,7 +378,7 @@ body {
 		border-radius: 18px;
 	}
 
-	.sh-panel__site {
+	.sh-panel__top {
 		margin-bottom: 8px;
 	}
 
@@ -381,7 +401,7 @@ body {
 
 @media (max-height: 560px) and (max-width: 900px) {
 	.sh-panel__text,
-	.sh-search {
+	.sh-countdown__label {
 		display: none;
 	}
 }
