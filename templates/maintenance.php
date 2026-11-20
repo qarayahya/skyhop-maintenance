@@ -37,11 +37,6 @@ $skyhop_units = array(
 
 	<div class="sh-score" aria-hidden="true">0</div>
 
-	<div class="sh-message" aria-live="polite">
-		<p class="sh-message__title"></p>
-		<p class="sh-message__sub"></p>
-	</div>
-
 	<div class="sh-toolbar">
 		<button type="button" class="sh-icon-btn sh-sound" aria-pressed="true">
 			<svg class="sh-icon sh-icon--on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4Z" fill="currentColor"/><path d="M15.5 8.8a4.5 4.5 0 0 1 0 6.4M18 6.3a8 8 0 0 1 0 11.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
@@ -50,12 +45,33 @@ $skyhop_units = array(
 		</button>
 	</div>
 
+	<div class="sh-stage">
 	<aside class="sh-panel" aria-labelledby="sh-headline">
 		<div class="sh-panel__top">
 			<span class="sh-panel__site"><?php echo esc_html( $skyhop_site ); ?></span>
 			<?php if ( $skyhop_settings['show_login'] ) : ?>
 				<a class="sh-panel__login" href="<?php echo esc_url( wp_login_url() ); ?>"><?php esc_html_e( 'Log in', 'skyhop-maintenance' ); ?></a>
 			<?php endif; ?>
+		</div>
+
+		<div class="sh-illo" aria-hidden="true">
+			<svg viewBox="0 0 120 120">
+				<defs>
+					<mask id="sh-gear-a"><rect width="120" height="120" fill="#fff"/><circle cx="50" cy="64" r="9" fill="#000"/></mask>
+					<mask id="sh-gear-b"><rect width="120" height="120" fill="#fff"/><circle cx="83" cy="35" r="4.5" fill="#000"/></mask>
+				</defs>
+				<g class="sh-illo__gear sh-illo__gear--big" mask="url(#sh-gear-a)">
+					<circle cx="50" cy="64" r="27" fill="none" stroke-width="10" stroke-dasharray="8.5 8.46"/>
+					<circle cx="50" cy="64" r="24"/>
+				</g>
+				<g class="sh-illo__gear sh-illo__gear--small" mask="url(#sh-gear-b)">
+					<circle cx="83" cy="35" r="14" fill="none" stroke-width="7" stroke-dasharray="5.5 5.5"/>
+					<circle cx="83" cy="35" r="12"/>
+				</g>
+				<circle class="sh-illo__spark" cx="92" cy="78" r="3"/>
+				<circle class="sh-illo__spark" cx="26" cy="30" r="2.5"/>
+				<circle class="sh-illo__spark" cx="98" cy="60" r="1.8"/>
+			</svg>
 		</div>
 
 		<p class="sh-panel__eyebrow"><?php esc_html_e( 'Down for maintenance', 'skyhop-maintenance' ); ?></p>
@@ -100,6 +116,12 @@ $skyhop_units = array(
 			<p class="sh-keys"><kbd><?php esc_html_e( 'Space', 'skyhop-maintenance' ); ?></kbd> <?php esc_html_e( 'fly', 'skyhop-maintenance' ); ?> <kbd>P</kbd> <?php esc_html_e( 'pause', 'skyhop-maintenance' ); ?></p>
 		</div>
 	</aside>
+
+	<div class="sh-message" aria-live="polite">
+		<p class="sh-message__title"></p>
+		<p class="sh-message__sub"></p>
+	</div>
+	</div>
 
 	<?php wp_print_scripts( Skyhop_Maintenance_Frontend::HANDLE ); ?>
 </body>

@@ -11,6 +11,8 @@
 	--sh-subtle: #f6f7f7;
 
 	max-width: 960px;
+	margin-right: auto;
+	margin-left: auto;
 	color: var(--sh-text);
 }
 
