@@ -239,16 +239,6 @@
 			ctx.lineTo( -18, 3 );
 			ctx.fill();
 
-			ctx.fillStyle = '#fff';
-			circle( ctx, 11, -4, 5 );
-			ctx.fill();
-			ctx.fillStyle = '#2a2018';
-			circle( ctx, 12.6, -4, 2.6 );
-			ctx.fill();
-			ctx.fillStyle = 'rgba(240,96,70,0.45)';
-			circle( ctx, 12, 5, 2.8 );
-			ctx.fill();
-
 			ctx.strokeStyle = '#2a2018';
 			ctx.lineWidth = 1.6;
 			ctx.beginPath();
@@ -368,22 +358,6 @@
 			ctx.fill();
 			ctx.fillStyle = '#cbbdf6';
 			ellipse( ctx, 2, 6, 10, 8 );
-			ctx.fill();
-
-			ctx.fillStyle = '#fff';
-			circle( ctx, 3, -4, 6 );
-			ctx.fill();
-			circle( ctx, 14, -3, 5.5 );
-			ctx.fill();
-			ctx.fillStyle = '#f5a524';
-			circle( ctx, 4.5, -4, 3.6 );
-			ctx.fill();
-			circle( ctx, 15, -3, 3.3 );
-			ctx.fill();
-			ctx.fillStyle = '#1a1433';
-			circle( ctx, 5, -4, 1.8 );
-			ctx.fill();
-			circle( ctx, 15.5, -3, 1.6 );
 			ctx.fill();
 
 			ctx.fillStyle = '#f5a524';
@@ -691,19 +665,6 @@
 			ellipse( ctx, 6, -8, 9, 3 );
 			ctx.fill();
 			ctx.restore();
-
-			ctx.fillStyle = '#fff';
-			circle( ctx, 10, -3, 4.6 );
-			ctx.fill();
-			ctx.fillStyle = '#16324f';
-			circle( ctx, 11.3, -3, 2.4 );
-			ctx.fill();
-
-			ctx.strokeStyle = '#9a4b00';
-			ctx.lineWidth = 1.3;
-			ctx.beginPath();
-			ctx.arc( 15, 4, 2.5, 0.2, PI - 0.6 );
-			ctx.stroke();
 		}
 	};
 
@@ -970,24 +931,6 @@
 
 			ctx.fillStyle = 'rgba(255,255,255,0.75)';
 			ellipse( ctx, -6, -8, 5, 3, -0.5 );
-			ctx.fill();
-
-			ctx.fillStyle = '#123247';
-			circle( ctx, 5, -3, 2.2 );
-			ctx.fill();
-			circle( ctx, 12, -2, 2 );
-			ctx.fill();
-			ctx.strokeStyle = '#123247';
-			ctx.lineWidth = 1.5;
-			ctx.lineCap = 'round';
-			ctx.beginPath();
-			ctx.arc( 8.5, 2, 3.2, 0.25, PI - 0.25 );
-			ctx.stroke();
-			ctx.lineCap = 'butt';
-			ctx.fillStyle = 'rgba(255,120,170,0.5)';
-			circle( ctx, 2, 4, 2.4 );
-			ctx.fill();
-			circle( ctx, 15, 4, 2.1 );
 			ctx.fill();
 		}
 	};
